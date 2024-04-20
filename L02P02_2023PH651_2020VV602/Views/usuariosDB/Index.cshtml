@@ -1,0 +1,146 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <style>
+        #header {
+            background-color: #4c5bfa;
+        }
+        #footer{
+            background-color: #4c5bfa;
+        }
+    </style>
+    <div class="container text-center" id="header">
+        <img src="https://catolica.edu.sv/wp-content/uploads/2022/05/LOGO-UNICAES.jpg" alt="..." width="150" height="150">
+        <h1>Creación de usuarios</h1>
+        Ingrese los datos solicitados!
+    </div>
+    <br />
+    <form asp-action="CrearCliente">
+        @*Inicio del Formulario*@
+
+        <Div class="form-group row mt-2">
+            @*IZQUIERDAo*@
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-6 mb-2">
+                            <label class="form-label">Nombre</label>
+                            @Html.TextBox("nombre","",new {@class="form-control"})
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label class="form-label">Apellido</label>
+                            @Html.TextBox("apellido","",new {@class="form-control"})
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label class="form-label">Email</label>
+                            @Html.TextBox("Email","",new {@class="form-control"})
+                        </div>
+                        <div class="col-12 mb-2">
+                            <label class="form-label">Dirección</label>
+                            @Html.TextBox("Direccion","",new {@class="form-control"})
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            @Html.DropDownList("id_departamento", ViewData["listadoDeDepartamentos"] as SelectList, "Seleccione un departamento", new {@class = "form-control"})
+                        </div>
+                        <div class="col">
+                            @Html.RadioButton("genero", "M", true, new { id = "masculino" })
+                            Masculino
+                            @Html.RadioButton("genero", "F", true, new { id = "femenino" })
+                            Femenino
+                        </div>
+                        <div class="col">
+                            @Html.DropDownList("id_puesto", ViewData["listadoDePuestos"] as SelectList, "Seleccione un puesto", new {@class = "form-control"})
+                        </div>
+                    </div>
+                </Div>
+                <div class="col-4">
+                    <div class="row mb-4">
+                    @*DERECHA*@
+                        <div class="card" style="width: 18rem;">
+                          <img src="https://media.istockphoto.com/id/1300845620/es/vector/icono-de-usuario-plano-aislado-sobre-fondo-blanco-s%C3%ADmbolo-de-usuario-ilustraci%C3%B3n-vectorial.jpg?s=1024x1024&w=is&k=20&c=xcdRV86D21s-vCU0cgoXbFZLECdgXrlRMJN8LzgZCi0=" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <div class="form-group">
+                                <label for="archivo">Seleccione el archivo a cargar</label>
+                                <input type="file" class="form-control" id="archivo" name="archivo"/>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="d-grid gap-2 col-12 mx-auto">
+                            <input type="submit" class="btn btn-success" value="Guardar"/>
+                        </div>
+                    </div>
+                </Div>
+            </div>
+
+        </Div>
+        <hr />
+        @*Fin del Formulario*@
+    </form>
+
+    <div class="row">
+            <table class="table table-striped-columns">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nombre Completo
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Dirección
+                            </th>
+                            <th>
+                                Departamento
+                            </th>
+                            <th>
+                                Genero
+                            </th>
+                            <th>
+                                Puesto
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var baseCompleta in (IEnumerable<dynamic>)ViewData["base_Completa"])
+                        {
+                            <tr>
+                                <td>
+                                    @baseCompleta.nombre @baseCompleta.apellido
+                                </td>
+                                <td>
+                                    @baseCompleta.email
+                                </td>
+                                <td>
+                                    @baseCompleta.direccion
+                                </td>
+                                <td>
+                                    @baseCompleta.departamento
+                                </td>
+                                <td>
+                                    @baseCompleta.genero
+                                </td>
+                                <td>
+                                    @baseCompleta.puesto
+                                </td>
+                                <td>
+                                    <a asp-action="Delete" asp-route-id="@baseCompleta.id_cliente"><button type="button" class="btn btn-danger">Eliminar</button></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="container text-center" id="footer">
+            2023PH651 - JUAN FELIPE PEÑATE HERNÁNDEZ
+            <br/>
+            2020VV602 - LUIS FELIPE VELASQUEZ VALLADARES
+        </div>
+}

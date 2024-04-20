@@ -1,7 +1,16 @@
+using L02P02_2023PH651_2020VV602.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<usuariosDB_DbContext>(opt =>
+    opt.UseSqlServer(
+            builder.Configuration.GetConnectionString("usuariosDB_DbConnection")
+        )
+);
 
 var app = builder.Build();
 
